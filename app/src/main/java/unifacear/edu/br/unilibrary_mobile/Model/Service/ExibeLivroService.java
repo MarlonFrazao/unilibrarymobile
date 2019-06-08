@@ -16,28 +16,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import unifacear.edu.br.unilibrary_mobile.ExibeLivroActivity;
-import unifacear.edu.br.unilibrary_mobile.ListActivityLivro;
 import unifacear.edu.br.unilibrary_mobile.Model.Entity.Livro;
 
-public class LivroListService  extends AsyncTask<String,String,String> {
+public class ExibeLivroService extends AsyncTask<String,String,String> {
 
-    private String urlString = "https://unilibrary.000webhostapp.com/livro/listar";
-    private static List<Livro> lista;
+    private String urlString = "https://unilibrary.000webhostapp.com/livro/pesquisa/";
+    private Integer id;
 
-    private ListActivityLivro activityLivro;
-    private ExibeLivroActivity activityExibeLivro;
+    private ExibeLivroActivity activity;
     private ProgressDialog dialog;
     private Context context;
 
-    public LivroListService(Context context) {
+    public ExibeLivroService(Context context) {
         this.context = context;
-    }
-    public void setActivity(ListActivityLivro activity) {
-        this.activityLivro = activity;
     }
 
     public void setActivity(ExibeLivroActivity activity) {
-        this.activityExibeLivro = activity;
+        this.activity = activity;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override
@@ -50,13 +49,12 @@ public class LivroListService  extends AsyncTask<String,String,String> {
 
     @Override
     protected String doInBackground(String... strings) {
-
         JSONObject json = new JSONObject();
 
         try{
 
 
-            URL url = new URL(urlString);
+            URL url = new URL(urlString + this.id);
 
             HttpURLConnection connection = (HttpURLConnection)url.openConnection();
 
@@ -109,15 +107,9 @@ public class LivroListService  extends AsyncTask<String,String,String> {
 
                 dialog.dismiss();
             }
-
-            activityLivro.listar(livros);
-            lista = livros;
+            activity.exibir(livros);
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public List<Livro> getLista(){
-        return this.lista;
     }
 }

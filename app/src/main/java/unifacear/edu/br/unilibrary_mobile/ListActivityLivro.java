@@ -30,7 +30,6 @@ public class ListActivityLivro extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(), ExibeLivroActivity.class);
                 intent.putExtra("ID", id);
-                intent.putExtra("POSITION", position);
                 startActivity(intent);
             }
         });

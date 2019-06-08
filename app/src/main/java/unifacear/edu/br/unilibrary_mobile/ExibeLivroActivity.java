@@ -2,17 +2,18 @@ package unifacear.edu.br.unilibrary_mobile;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import unifacear.edu.br.unilibrary_mobile.Model.Entity.Livro;
+import unifacear.edu.br.unilibrary_mobile.Model.Service.ExibeLivroService;
 import unifacear.edu.br.unilibrary_mobile.Model.Service.LivroListService;
 
 public class ExibeLivroActivity extends AppCompatActivity {
-    long idSelected;
-    long positionSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,13 +23,13 @@ public class ExibeLivroActivity extends AppCompatActivity {
 
         LinearLayout ll = findViewById(R.id.exibeLivro);
 
-        idSelected = getIntent().getLongExtra("ID", 0);
-        positionSelected = getIntent().getIntExtra("POSITION", 0);
+        long idSelected = getIntent().getLongExtra("ID", 0);
 
         // Então aqui você utiliza o ID do item(caso tenha) para pesquisar no banco de dados ou a position para pesquisar na list de origem
         // E então setar a View com os detalhes do item.
 
-        LivroListService s = new LivroListService(ll.getContext());
+        ExibeLivroService s = new ExibeLivroService(ll.getContext());
+        s.setId((int)idSelected);
         s.setActivity(this);
         s.execute();
     }
@@ -36,22 +37,12 @@ public class ExibeLivroActivity extends AppCompatActivity {
 
 
     public void exibir(List<Livro> livros) {
-        for(Livro l : livros) {
-            if(l.getId() == (int) idSelected){
-                TextView titulo = findViewById(R.id.titulo);
-                TextView autor = findViewById(R.id.autor);
+        TextView id = findViewById(R.id.id);
+        TextView titulo = findViewById(R.id.titulo);
+        TextView descricao = findViewById(R.id.descricao);
 
-                titulo.setText(l.getTitulo());
-                autor.setText(l.getAutor().getNome());
-                break;
-            }
-        }
-
-
-       /* TextView titulo = findViewById(R.id.titulo);
-        TextView autor = findViewById(R.id.autor);
-
-        titulo.setText(livros.get((int) positionSelected).getTitulo());
-        autor.setText(livros.get((int) positionSelected).getAutor().getNome());*/
+        id.setText(livros.get(0).getId());
+        titulo.setText(livros.get(0).getTitulo());
+        descricao.setText(livros.get(0).getDescricao());
     }
 }
