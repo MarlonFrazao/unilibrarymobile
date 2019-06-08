@@ -18,6 +18,11 @@ public class Livro {
         this.descricao = descricao;
     }
 
+    @Override
+    public String toString() {
+        return id + "  " + titulo;
+    }
+
     public Integer getId() {
         return id;
     }
