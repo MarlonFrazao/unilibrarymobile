@@ -28,7 +28,7 @@ public class ExibeLivroActivity extends AppCompatActivity {
         // Então aqui você utiliza o ID do item(caso tenha) para pesquisar no banco de dados ou a position para pesquisar na list de origem
         // E então setar a View com os detalhes do item.
 
-        ExibeLivroService s = new ExibeLivroService(this);
+        ExibeLivroService s = new ExibeLivroService(getApplicationContext());
         s.setId((int)idSelected);
         s.setActivity(this);
         s.execute();

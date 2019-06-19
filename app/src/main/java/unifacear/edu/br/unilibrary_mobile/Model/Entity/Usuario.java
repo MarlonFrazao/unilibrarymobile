@@ -4,13 +4,13 @@ public class Usuario {
     private Integer id;
     private Integer usuario;
     private Integer senha;
-    private Permissao permissao;
+    private Integer permissao;
     private Boolean status;
     private Aluno aluno;
 
     public Usuario() {}
 
-    public Usuario(Integer id, Integer usuario, Integer senha, Permissao permissao,
+    public Usuario(Integer id, Integer usuario, Integer senha, Integer permissao,
                    Boolean status, Aluno aluno) {
         super();
         this.id = id;
@@ -45,11 +45,11 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public Permissao getPermissao() {
+    public Integer getPermissao() {
         return permissao;
     }
 
-    public void setPermissao(Permissao permissao) {
+    public void setPermissao(Integer permissao) {
         this.permissao = permissao;
     }
 

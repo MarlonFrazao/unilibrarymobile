@@ -56,7 +56,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Senha"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:inputType="number"/>
 
             <EditText
                 android:id="@+id/edtSenha"
@@ -64,12 +65,13 @@
                 android:layout_height = "wrap_content"
                 android:ems="10"
                 android:inputType="textPassword" />
-
+            <!-- 001 no onClick o botão chama os metodo click-->
             <Button
                 android:id="@+id/btnEntrar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Entrar" />
+                android:text="Entrar"
+                android:onClick="click"/>
 
         </LinearLayout>
 
