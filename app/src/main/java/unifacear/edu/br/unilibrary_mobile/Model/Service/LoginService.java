@@ -39,14 +39,14 @@ public class LoginService extends AsyncTask<Login,String,String> {
 
 
 
-    @Override
+   /* @Override
     protected void onPreExecute() {
         //7 Executa o loading
         dialog = new ProgressDialog(context);
         dialog.setTitle("Por favor aguarde");
         dialog.setMessage("Carregando...");
         dialog.show();
-    }
+    }*/
 
     // para de executar aqui
     @Override
@@ -92,6 +92,7 @@ public class LoginService extends AsyncTask<Login,String,String> {
 
             br.close();
             return sb.toString();
+
         } catch(Exception e){
             e.printStackTrace();
         }
@@ -101,6 +102,9 @@ public class LoginService extends AsyncTask<Login,String,String> {
     @Override
     protected void onPostExecute(String result) {
         //9 verifica o resultado
+        if(result == null) {
+            result = "false";
+        }
         if(!result.equalsIgnoreCase("false")) {
             // 10 se verdadeiro monta o usuario
             try {
@@ -119,18 +123,19 @@ public class LoginService extends AsyncTask<Login,String,String> {
                     usuarios.add(usuario);
 
 
-                    dialog.dismiss();
+                    //dialog.dismiss();
                 }
                 // 11 passa true para o metodo login
                 activity.login(true);
             } catch (Exception e) {
                 e.printStackTrace();
+                Log.d("teste", e.getMessage());
             }
 
         } else {
             // 12 se falso passa false no metodo login
             activity.login(false);
-            dialog.dismiss();
+           // dialog.dismiss();
         }
     }
 }
