@@ -3,6 +3,7 @@ package unifacear.edu.br.unilibrary_mobile.Model.Service;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -50,6 +51,10 @@ public class LoginService extends AsyncTask<Login,String,String> {
     // para de executar aqui
     @Override
     protected String doInBackground(Login... logins) {
+
+        Log.d("teste", "entrou no doInBack");
+        if(android.os.Debug.isDebuggerConnected())
+            android.os.Debug.waitForDebugger();
         JSONObject json = new JSONObject();
 
         try{
